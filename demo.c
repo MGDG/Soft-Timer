@@ -18,12 +18,41 @@
 
 #include "MySoftTimer.h"
 
+//输出所有定时器序号以及对应的在激活列表中的序号
+void get_timer_list(void)
+{
+	LIST_LINK_NODE *list = NULL;				//定时器列表
+	SOFT_TIMER_LINK_NODE *actlist = NULL;			//定时器链表头指针
+	uint8_t count = 1;
+	
+	printf("\r\nAll timer list:\r\n");
+	list = AllTimerList;
+	while(list != NULL)
+	{
+		printf("Timer(%d):\t%08X",count++,list->TimerIndex);
+		
+		if(FindNode(ActivTimerList,(SOFT_TIMER_LINK_NODE *)(list->TimerIndex)))
+		{
+			printf("\tactivated\r\n");
+		}
+		else
+			printf("\r\n");
+		
+		list = list->next_node;
+	}
+	
+	count = 1;
+	printf("\r\nActivated timer list:\r\n");
+	actlist = ActivTimerList;
+	while(actlist != NULL)
+	{
+		printf("Timer(%d):\t%08X\r\n",count++,(u32)actlist);
+		actlist = actlist->next_node;
+	}
+}
 
-//定时器序号
 uint32_t timertest_TimerIndex = 0;
 uint32_t testhandle_TimerIndex = 0;
-
-
 static void handle1(void)
 {
 	printf("handle1 timer running");
@@ -94,7 +123,10 @@ bool softtimer_test_start(void)
 	}
 	else
 	{
-		printf("Test timer Index error");
+		if(SOFT_TIMER_IsTimerStart(timertest_TimerIndex))
+			printf("Test timer activated already");
+		else
+			printf("Test timer inactivated");
 		return false;
 	}
 }
