@@ -15,9 +15,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef void (*Function)(void);
+typedef void (*SoftTimerCallbackFunction)(const uint32_t interval);
 
-uint32_t SOFT_TIMER_CreateTimer(const uint32_t interval, Function timproc,const uint8_t on_off);
+uint32_t SOFT_TIMER_CreateTimer(const uint32_t interval, SoftTimerCallbackFunction timproc,const uint8_t on_off);
 bool SOFT_TIMER_KillTimer(uint32_t *index);
 bool SOFT_TIMER_StartTimer(uint32_t index);
 bool SOFT_TIMER_StopTimer(uint32_t index);
