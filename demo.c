@@ -53,11 +53,11 @@ void get_timer_list(void)
 
 uint32_t timertest_TimerIndex = 0;
 uint32_t testhandle_TimerIndex = 0;
-static void handle1(void)
+static void handle1(const uint32_t TimeInterVal)
 {
 	printf("handle1 timer running");
 }
-static void testhandle(void)
+static void testhandle(const uint32_t TimeInterVal)
 {
 	static bool flag = true;
 	
