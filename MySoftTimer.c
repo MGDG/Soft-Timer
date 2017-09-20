@@ -307,7 +307,7 @@ uint32_t SOFT_TIMER_CreateTimer(const uint32_t interval, SoftTimerCallbackFuncti
 	SOFT_TIMER_LINK_NODE *NewNode = NULL;
 	
 	if(interval > SOFT_TIMER_MAX_TIME)
-		return false;
+		return NULL;
 	
 	NewNode = (SOFT_TIMER_LINK_NODE *)malloc(sizeof(SOFT_TIMER_LINK_NODE));
 	if(NewNode != NULL)
