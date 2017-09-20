@@ -51,6 +51,17 @@ void get_timer_list(void)
 	}
 }
 
+void test1(const uint32_t TimeInterVal)
+{ 
+	static uint32_t timecount = 0;
+	timecount += TimeInterVal;
+	if(timecount >= 1000) 
+	{
+		timecount = 0;
+		printf("one second timer\r\n"); 
+	}
+}
+
 uint32_t timertest_TimerIndex = 0;
 uint32_t testhandle_TimerIndex = 0;
 static void handle1(const uint32_t TimeInterVal)
