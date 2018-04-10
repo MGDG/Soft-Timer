@@ -116,11 +116,14 @@ static bool TimerList_Pop(SOFT_TIMER_ALL_LIST **ListHead,M_TimerHandle index)
 	if(ListHead==NULL || index==NULL)
 		return false;
 
-	while( (q->TimerIndex != index) && (q != NULL) )
+	while( (q != NULL) && (q->TimerIndex != index) )
 	{
 		p = q;
 		q = q->next_node;
 	}
+
+	if(q == NULL)
+		return false;
 
 	if(q->TimerIndex != index)		//链表中不存在该节点
 		return false;
@@ -131,7 +134,7 @@ static bool TimerList_Pop(SOFT_TIMER_ALL_LIST **ListHead,M_TimerHandle index)
 		p->next_node = q->next_node;
 	
 	free(q);						//释放掉被删除的节点
-	return true;
+	return true;`
 }
 
 
